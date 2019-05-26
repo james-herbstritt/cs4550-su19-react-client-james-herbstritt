@@ -9,29 +9,26 @@ export default class CourseRow extends React.Component {
     }
     render() {
         return (
-            <div className="table-responsive">
-                <table className="table table-hover active bg-light">
-                    <tr>
-                        <td>
-                            <i className="fa fa-users" aria-hidden="true"></i>
-                            CS5610 Web Development
-                        </td>
-                        <td>
-                            Me
-                        </td>
-                        <td>
-                            May 8 2019
-                        </td>
-                        <td>
-                            <span className="float-right">
-                                <button className="btn bg-danger wbdv-delete"
-                                        type="button">
-                                    <i className="fa fa-times-circle"></i>
-                                </button>
-                            </span>
-                        </td>
-                    </tr>
-                </table>
-            </div>)
+            <tr>
+                <td>
+                    <i className="fa fa-users" aria-hidden="true"></i>
+                    CS5610 Web Development
+                </td>
+                <td>
+                    Me
+                </td>
+                <td>
+                    May 8 2019
+                </td>
+                <td>
+                    <span className="float-right">
+                        <button className="btn bg-danger wbdv-delete"
+                                type="button">
+                            <i className="fa fa-times-circle"></i>
+                        </button>
+                    </span>
+                </td>
+            </tr>
+               )
     }
 }

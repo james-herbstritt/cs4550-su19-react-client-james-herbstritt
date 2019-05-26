@@ -10,10 +10,7 @@ export default class CourseList extends React.Component {
     }
     render() {
         return (
-            <div className="table-responsive">
                 <CourseRow/>
-                <CourseRow/>
-            </div>
         )
     }
 }
