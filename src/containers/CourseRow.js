@@ -22,6 +22,14 @@ export default class CourseRow extends React.Component {
                         <td>
                             May 8 2019
                         </td>
+                        <td>
+                            <span className="float-right">
+                                <button className="btn bg-danger wbdv-delete"
+                                        type="button">
+                                    <i className="fa fa-times-circle"></i>
+                                </button>
+                            </span>
+                        </td>
                     </tr>
                 </table>
             </div>)
