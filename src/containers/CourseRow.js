@@ -1,24 +1,23 @@
 import React from 'react';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default class CourseRow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
     render() {
         return (
             <tr>
                 <td>
-                    <i className="fa fa-users" aria-hidden="true"></i>
-                    CS5610 Web Development
+                    <i className="fa fa-users mr-3" aria-hidden="true"></i>
+                    <Link to={`/course/edit/${this.props.course.id}`}>
+                        {this.props.course.title}
+                    </Link>
                 </td>
                 <td>
                     Me
                 </td>
                 <td>
-                    May 8 2019
+                    May something
                 </td>
                 <td>
                     <span className="float-right">
@@ -29,6 +28,8 @@ export default class CourseRow extends React.Component {
                     </span>
                 </td>
             </tr>
-               )
+        )
     }
+
+
 }

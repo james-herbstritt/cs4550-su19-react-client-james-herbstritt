@@ -12,7 +12,6 @@ export default class CourseNavbar extends React.Component {
     render () {
         return (
             <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
-                <div className="container-fluid">
                     <div className="collapse navbar-collapse" id="collapseNavbar">
                         <div className="navbar-header">
                             <a className="navbar-brand" href="#">
@@ -31,7 +30,6 @@ export default class CourseNavbar extends React.Component {
                             </button>
                         </div>
                     </div>
-                </div>
             </nav>
         )
     }

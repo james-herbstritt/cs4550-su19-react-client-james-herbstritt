@@ -1,53 +1,38 @@
-function CourseService() {
-    this.createCourse = createCourse;
-    this.findAllCourses = findAllCourses;
-    this.findCourseById = findCourseById;
-    this.updateCourse = updateCourse;
-    this.deleteCourse = deleteCourse;
-    this.url = 'http://localhost:3000/api/users/';
-    const self = this;
+import courses from '../db/courses.json'
+export default class CourseService {
+    static myInstance = null;
+    courses = courses;
 
-    function createCourse(course) {
-        course.id = (new Date()).getTime();
-        return fetch(this.url, {
-            method: "post",
-            body: JSON.stringify(course),
-            headers: {
-                "content-type": "application/json"
+    static getInstance() {
+        if (CourseService.myInstance == null) {
+            CourseService.myInstance = new CourseService();
+        }
+        return this.myInstance;
+    }
+
+    createCourse = course => this.courses.push(course);
+
+
+    findAllCourses = () => this.courses;
+
+    findCourseById = id => {
+        for (var c in this.courses) {
+            if (this.courses[c].id === id) {
+                return this.courses[c];
             }
-        });
-    }
+        }
+    };
 
-    function findAllCourses() {
-        return fetch(this.url)
-            .then((value) => {
-                return value.json();
-            });
-    }
+    deleteCourse = id => {
+        this.courses.filter(course => course.id !== id);
+    };
 
-    function findCourseById(id) {
-        return fetch(this.url + id)
-            .then((value) => {
-                return value.json();
-            });
-    }
-
-    function updateCourse(id, course) {
-        return fetch(this.url + id, {
-            method: post,
-                body: JSON.stringify(course),
-                headers: {
-                "content-type": "application/json"
+    updateCourse(id, course) {
+        for (var c in this.courses) {
+            if (this.courses[c].id === id) {
+                this.courses[c] = course;
+                this.courses[c].id = id;
             }
-        });
-    }
-
-    function deleteCourse(id) {
-        return fetch(this.url + id, {
-            method: "delete",
-            headers: {
-                "content-type": "application/json"
-            }
-        });
-    }
+        }
+    };
 }
