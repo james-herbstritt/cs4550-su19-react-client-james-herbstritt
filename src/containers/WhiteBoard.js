@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import CourseTable from "./CourseTable";
 import CourseGrid from "./CourseGrid";
 import CourseService from '../services/CourseService'
-import CourseHeader from "./CourseHeader";
 import CourseNavbar from "./CourseNavbar";
 
 export default class WhiteBoard extends React.Component {
@@ -14,9 +13,12 @@ export default class WhiteBoard extends React.Component {
 
         this.state = {
             courses: courses,
-            selectedCourse: courses[0]
+            selectedCourse: courses[0],
+            table: true
         };
     }
+
+    toggleTable = () => this.state.table = !this.state.table;
 
     selectCourse = course =>
         this.setState({selectedCourse: course});
@@ -25,8 +27,6 @@ export default class WhiteBoard extends React.Component {
         return (
             <Router>
                 <div>
-                    <Link to="/course/table">Table</Link>
-                    | <Link to="/course/grid">Grid</Link>
                     <CourseNavbar/>
                     <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses}/>}/>

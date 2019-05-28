@@ -1,10 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseCard from './CourseCard';
-import CourseNavbar from "./CourseNavbar";
-import CourseHeader from "./CourseHeader";
+import CourseGridHeader from "./CourseGridHeader";
+
 
 export default class CourseGrid extends React.Component {
     constructor(props) {
@@ -13,10 +12,14 @@ export default class CourseGrid extends React.Component {
     }
     render () {
         return (
-            <div className="card-deck">
-                { this.props.courses.map((course, key) => <CourseCard course={course} key={key}/>)}
+            <div>
+                <CourseGridHeader/>
+                <div className="col-8">
+                    <div className="card-deck container-fluid w-50">
+                        { this.props.courses.map((course, key) => <CourseCard course={course} key={key}/>)}
+                    </div>
+                </div>
             </div>
-
         )
     }
 }
