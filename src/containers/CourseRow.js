@@ -30,6 +30,4 @@ export default class CourseRow extends React.Component {
             </tr>
         )
     }
-
-
 }
