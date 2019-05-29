@@ -30,7 +30,7 @@ export default class CourseNavbar extends React.Component {
                                value={this.state.courseName}
                                placeholder="New Course Title"/>
                         <button className="btn btn-success flex-shrink-0"
-                                onClick={() => this.props.addCourse(this.courseName)}>
+                                onClick={() => this.props.addCourse(this.state.courseName)}>
                             Add Course
                         </button>
                     </div>
