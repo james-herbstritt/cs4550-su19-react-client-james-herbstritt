@@ -24,7 +24,9 @@ export default class CourseService {
     };
 
     deleteCourse = id => {
-        this.courses.filter(course => course.id !== id);
+        this.courses = this.courses.filter(course => course.id !== id);
+        console.log("courses after", this.courses)
+
     };
 
     updateCourse(id, course) {

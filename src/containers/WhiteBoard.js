@@ -10,29 +10,28 @@ export default class WhiteBoard extends React.Component {
         super(props);
         let courseService = CourseService.getInstance();
         const courses = courseService.findAllCourses();
-
         this.state = {
             courses: courses,
-            selectedCourse: courses[0],
-            table: true
+            selectedCourse: courses[0]
         };
     }
 
-    toggleTable = () => this.state.table = !this.state.table;
+    selectCourse = course => this.setState({selectedCourse: course});
 
-    selectCourse = course =>
-        this.setState({selectedCourse: course});
+    deleteCourse = id => {
+        let courseService = CourseService.getInstance();
+        courseService.deleteCourse(id);
+        this.setState({courses: courseService.findAllCourses()});
+    };
 
     render() {
         return (
             <Router>
-                <div>
                     <CourseNavbar/>
                     <Route path="/course/table"
-                           render={() => <CourseTable courses={this.state.courses}/>}/>
+                           render={() => <CourseTable courses={this.state.courses}deleteCourse={this.deleteCourse}/>}/>
                     <Route path="/course/grid"
                            render={() => <CourseGrid courses={this.state.courses}/>}/>
-                </div>
             </Router>
         )
     }
