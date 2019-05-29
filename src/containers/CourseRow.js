@@ -26,6 +26,6 @@ const CourseRow = ({course, deleteRow}) =>
                 </button>
             </span>
         </td>
-    </tr>
+    </tr>;
 
 export default CourseRow

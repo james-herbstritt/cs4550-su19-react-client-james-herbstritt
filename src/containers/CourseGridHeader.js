@@ -8,18 +8,28 @@ export default class CourseGridHeader extends React.Component {
         return (
             <div className="row p-2 align-text-bottom
                             border-bottom border-top mb-1
-                            font-weight-bold align-items-center bg-light">
+                            font-weight-bold align-items-center bg-light
+                            container-fluid">
                 <div className="col-6">
                     Recent Documents
                 </div>
                 <div className="col-4 text-right">
                     <div className="dropdown">
                         <button className="btn font-weight-bold bg-light dropdown-toggle"
+                                id="ownerdropdown"
                                 type="button"
+                                data-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                         Owned By
                         </button>
+                        <div className="dropdown-menu"
+                             aria-labelledby="ownerdropdown">
+                            <button className="dropdown-item"
+                                    type="button">
+                                Me
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="col-2 text-right">

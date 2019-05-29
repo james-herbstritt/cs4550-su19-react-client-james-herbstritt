@@ -27,6 +27,9 @@ export default class WhiteBoard extends React.Component {
     addCourse = courseName => {
         console.log("Course Name", courseName);
         let courseService = CourseService.getInstance();
+        if (courseName === "") {
+            courseName = "New Course Title";
+        }
         var course = {
             id: new Date().getTime(),
             title: courseName
@@ -42,7 +45,7 @@ export default class WhiteBoard extends React.Component {
                     <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses} deleteCourse={this.deleteCourse}/>}/>
                     <Route path="/course/grid"
-                           render={() => <CourseGrid courses={this.state.courses}/>}/>
+                           render={() => <CourseGrid courses={this.state.courses} deleteCourse={this.deleteCourse}/>}/>
             </Router>
         )
     }

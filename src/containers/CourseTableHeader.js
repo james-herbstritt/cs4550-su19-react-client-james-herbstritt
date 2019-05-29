@@ -20,7 +20,6 @@ export default class CourseTableHeader extends React.Component {
                 </th>
                 <th>Last modified</th>
                 <th className="text-right">
-
                     <Link className="btn"
                         to="/course/grid">
                         <i className="fa fa-th"></i>

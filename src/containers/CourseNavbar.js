@@ -17,7 +17,7 @@ export default class CourseNavbar extends React.Component {
             <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
                 <div className="collapse navbar-collapse" id="collapseNavbar">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="#">
+                        <a className="navbar-brand" href="/course/table">
                             Course Manager
                         </a>
                     </div>
