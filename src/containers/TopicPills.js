@@ -7,8 +7,9 @@ const TopicPills = ({topics, selectTopic, selectedTopic}) =>
             <li className="nav-item"
                 key={key}
                 onClick={() => selectTopic(topic)}>
-                <a className={topic===selectedTopic ?
-                    "nav-link active":
+                <a href="#"
+                    className={topic === selectedTopic ?
+                    "nav-link active" :
                     "nav-link"}>
                     {topic.title}</a></li>)}
     </ul>;

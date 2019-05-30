@@ -7,7 +7,8 @@ const LessonTabs = ({lessons, selectLesson, selectedLesson}) =>
         <li className="nav-item"
             key={key}
             onClick={() => selectLesson(lesson)}>
-            <a className={lesson===selectedLesson ?
+            <a href="#"
+                className={lesson===selectedLesson ?
                 "nav-link active":
                 "nav-link"}>
                 {lesson.title}</a></li>)}

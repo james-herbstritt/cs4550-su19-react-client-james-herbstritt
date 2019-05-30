@@ -35,9 +35,19 @@ export default class WhiteBoard extends React.Component {
         if (courseName === "") {
             courseName = "New Course Title";
         }
+        var topics =  [{title: "Default Topic"}];
+        var lessons = [{
+            title: "Default Lesson",
+            topics: topics
+        }];
+        var modules = [{
+            title: "Default Module",
+            lessons: lessons
+        }];
         var course = {
             id: new Date().getTime(),
-            title: courseName
+            title: courseName,
+            modules: modules
         };
         courseService.createCourse(course);
         this.setState({courses: courseService.findAllCourses()});

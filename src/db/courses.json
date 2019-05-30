@@ -52,15 +52,38 @@
           }
         ]
       },
+
       {
         "title": "Week 2",
-        "lessons": []
+        "lessons": [
+          {
+            "title": "Default Lesson",
+            "topics": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          }
+        ]
       }
-    ]
-  },
+      ]},
   {
     "id": "234",
     "title": "CS5200",
-    "modules": []
+    "modules": [
+      {
+        "title" : "Default Title",
+        "lessons": [
+          {
+            "title": "Default Lesson",
+            "topics": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]

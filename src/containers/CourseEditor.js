@@ -26,20 +26,26 @@ export default class CourseEditor extends React.Component {
 
     render () {
         return (
-            <div className="row">
-                <div className="col-3">
-                    <ModuleList modules={this.props.course.modules}
-                                selectModule={this.selectModule}
-                                selectedModule={this.state.selectedModule}/></div>
-                <div className="col-3">
-                    <LessonTabs lessons={this.state.selectedModule.lessons}
-                                selectLesson={this.selectLesson}
-                                selectedLesson={this.state.selectedLesson}/>
-                    <TopicPills topics={this.state.selectedLesson.topics}
-                                selectTopic={this.selectTopic}
-                                SelectedTopic={this.state.selectedTopic}/>
+            <div className="container-fluid">
+                <div className="row col-4 text-right">
+                    <h2>{this.props.course.title}</h2>
+                </div>
+                <div className="row">
+                    <div className="col-2">
+                        <ModuleList modules={this.props.course.modules}
+                                    selectModule={this.selectModule}
+                                    selectedModule={this.state.selectedModule}/></div>
+                    <div className="col-10">
+                        <LessonTabs lessons={this.state.selectedModule.lessons}
+                                    selectLesson={this.selectLesson}
+                                    selectedLesson={this.state.selectedLesson}/>
+                        <TopicPills topics={this.state.selectedLesson.topics}
+                                    selectTopic={this.selectTopic}
+                                    selectedTopic={this.state.selectedTopic}/>
+                    </div>
                 </div>
             </div>
+
         )
     }
 }
