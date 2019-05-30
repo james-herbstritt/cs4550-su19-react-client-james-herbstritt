@@ -3,7 +3,7 @@ import  {Link} from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
-const CourseCard = ({course, deleteCard}) =>
+const CourseCard = ({course, deleteCard, selectCourse}) =>
     <div className="col-xl-2 col-md-4 col-6">
         <div className="card mr-3 mb-3 align-items-stretch w-100">
             <img className="card-img-top"
@@ -13,7 +13,8 @@ const CourseCard = ({course, deleteCard}) =>
                 <h5 className="card-title">{course.title}</h5>
                 <p className="card-text">Last Modified: 14 May 2019</p>
                 <Link className="btn btn-success btn-block"
-                      to={`/course/edit/${course.id}`}>
+                      to={`/course/edit/${course.id}`}
+                      onClick={() => selectCourse(course.id)}>
                     Edit
                 </Link>
                 <button className="btn bg-danger text-white wbdv-delete btn-block"

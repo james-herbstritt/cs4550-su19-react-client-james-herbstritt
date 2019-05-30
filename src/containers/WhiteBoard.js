@@ -17,7 +17,12 @@ export default class WhiteBoard extends React.Component {
         };
     }
 
-    selectCourse = course => this.setState({selectedCourse: course});
+    selectCourse = id => {
+        let courseService = CourseService.getInstance();
+        console.log("selecting ", id);
+        this.setState({selectedCourse: courseService.findCourseById(id)});
+    };
+
 
     deleteCourse = id => {
         let courseService = CourseService.getInstance();
@@ -34,7 +39,7 @@ export default class WhiteBoard extends React.Component {
         var course = {
             id: new Date().getTime(),
             title: courseName
-        }
+        };
         courseService.createCourse(course);
         this.setState({courses: courseService.findAllCourses()});
     };
@@ -43,14 +48,18 @@ export default class WhiteBoard extends React.Component {
         return (
             <Router>
                 <Route path='/course/edit/:id'
-                       render={() => <CourseEditor course={this.state.selectedCourse} deleteCourse={this.deleteCourse}/>}/>
-                    <CourseNavbar addCourse={this.addCourse.bind(this)}/>
+                       render={() => <CourseEditor course={this.state.selectedCourse}
+                                                   deleteCourse={this.deleteCourse}/>}/>
                     <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses}
                                                       deleteCourse={this.deleteCourse}
-                                                      selectCourse={this.selectCourse}/>}/>
+                                                      selectCourse={this.selectCourse}
+                                                      addCourse={this.addCourse.bind(this)}/>}/>
                     <Route path="/course/grid"
-                           render={() => <CourseGrid courses={this.state.courses} deleteCourse={this.deleteCourse}/>}/>
+                           render={() => <CourseGrid courses={this.state.courses}
+                                                     deleteCourse={this.deleteCourse}
+                                                     selectCourse={this.selectCourse}
+                                                     addCourse={this.addCourse.bind(this)}/>}/>
             </Router>
         )
     }
