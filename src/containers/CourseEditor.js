@@ -3,6 +3,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import ModuleList from './ModuleList';
 import LessonTabs from './LessonTabs';
 import TopicPills from './TopicPills';
+import CourseEditorNavbar from "./CourseEditorNabvbar";
 
 export default class CourseEditor extends React.Component {
     constructor(props) {
@@ -24,24 +25,25 @@ export default class CourseEditor extends React.Component {
     selectTopic = topic =>
         this.setState({selectedTopic: topic});
 
+
     render () {
         return (
-            <div className="container-fluid">
-                <div className="row col-4 text-right">
-                    <h2>{this.props.course.title}</h2>
-                </div>
-                <div className="row">
-                    <div className="col-2">
-                        <ModuleList modules={this.props.course.modules}
-                                    selectModule={this.selectModule}
-                                    selectedModule={this.state.selectedModule}/></div>
-                    <div className="col-10">
-                        <LessonTabs lessons={this.state.selectedModule.lessons}
-                                    selectLesson={this.selectLesson}
-                                    selectedLesson={this.state.selectedLesson}/>
-                        <TopicPills topics={this.state.selectedLesson.topics}
-                                    selectTopic={this.selectTopic}
-                                    selectedTopic={this.state.selectedTopic}/>
+            <div>
+                <CourseEditorNavbar course={this.props.course}/>
+                <div className="container-fluid">
+                    <div className="row mt-3">
+                        <div className="col-2">
+                            <ModuleList modules={this.props.course.modules}
+                                        selectModule={this.selectModule}
+                                        selectedModule={this.state.selectedModule}/></div>
+                        <div className="col-10">
+                            <LessonTabs lessons={this.state.selectedModule.lessons}
+                                        selectLesson={this.selectLesson}
+                                        selectedLesson={this.state.selectedLesson}/>
+                            <TopicPills topics={this.state.selectedLesson.topics}
+                                        selectTopic={this.selectTopic}
+                                        selectedTopic={this.state.selectedTopic}/>
+                        </div>
                     </div>
                 </div>
             </div>
