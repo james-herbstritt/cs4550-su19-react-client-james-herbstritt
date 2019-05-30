@@ -4,6 +4,7 @@ import CourseTable from "./CourseTable";
 import CourseGrid from "./CourseGrid";
 import CourseService from '../services/CourseService'
 import CourseNavbar from "./CourseNavbar";
+import CourseEditor from "./CourseEditor";
 
 export default class WhiteBoard extends React.Component {
     constructor(props) {
@@ -41,9 +42,13 @@ export default class WhiteBoard extends React.Component {
     render() {
         return (
             <Router>
+                <Route path='/course/edit/:id'
+                       render={() => <CourseEditor course={this.state.selectedCourse} deleteCourse={this.deleteCourse}/>}/>
                     <CourseNavbar addCourse={this.addCourse.bind(this)}/>
                     <Route path="/course/table"
-                           render={() => <CourseTable courses={this.state.courses} deleteCourse={this.deleteCourse}/>}/>
+                           render={() => <CourseTable courses={this.state.courses}
+                                                      deleteCourse={this.deleteCourse}
+                                                      selectCourse={this.selectCourse}/>}/>
                     <Route path="/course/grid"
                            render={() => <CourseGrid courses={this.state.courses} deleteCourse={this.deleteCourse}/>}/>
             </Router>

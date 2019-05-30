@@ -4,7 +4,7 @@ import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseRow from '../containers/CourseRow';
 import CourseTableHeader from "./CourseTableHeader";
 
-const CourseTable = ({courses, deleteCourse}) =>
+const CourseTable = ({courses, deleteCourse, selectCourse}) =>
     <div className="table-responsive">
         <table className="table active table-hover">
             <thead>
@@ -12,7 +12,10 @@ const CourseTable = ({courses, deleteCourse}) =>
             </thead>
             <tbody>
             {courses.map((course, key) =>
-                <CourseRow deleteRow={deleteCourse} course={course} key={key}/>)}
+                <CourseRow deleteRow={deleteCourse}
+                           course={course}
+                           key={key}
+                           selectCourse={selectCourse}/>)}
             </tbody>
         </table>
     </div>;

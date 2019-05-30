@@ -3,11 +3,12 @@ import {Link} from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
-const CourseRow = ({course, deleteRow}) =>
+const CourseRow = ({course, deleteRow, selectCourse}) =>
     <tr>
         <td>
             <i className="fa fa-users mr-3" aria-hidden="true"></i>
-            <Link to={`/course/edit/${course.id}`}>
+            <Link to={`/course/edit/${course.id}`}
+                  onClick={() => selectCourse(course.id)}>
                 {course.title}
             </Link>
         </td>
