@@ -1,10 +1,16 @@
 import React from 'react';
+import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-const TopicPills = () =>
-    <div>
-        <h1>
-            Topic Pills
-        </h1>
-</div>;
+const TopicPills = ({topics, selectTopic, selectedTopic}) =>
+    <ul className="nav nav-pills">
+        { topics.map((topic, key) =>
+            <li className="nav-item"
+                key={key}
+                onClick={() => selectTopic(topic)}>
+                <a className={topic===selectedTopic ?
+                    "nav-link active":
+                    "nav-link"}>
+                    {topic.title}</a></li>)}
+    </ul>;
 
 export default TopicPills;

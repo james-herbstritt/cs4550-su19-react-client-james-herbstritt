@@ -21,6 +21,8 @@ export default class CourseEditor extends React.Component {
     selectLesson = lesson =>
         this.setState({selectedLesson: lesson,
                              selectedTopic: lesson.topics[0]});
+    selectTopic = topic =>
+        this.setState({selectedTopic: topic});
 
     render () {
         return (
@@ -33,8 +35,9 @@ export default class CourseEditor extends React.Component {
                     <LessonTabs lessons={this.state.selectedModule.lessons}
                                 selectLesson={this.selectLesson}
                                 selectedLesson={this.state.selectedLesson}/>
-                    <TopicPills //topics={}
-                    />
+                    <TopicPills topics={this.state.selectedLesson.topics}
+                                selectTopic={this.selectTopic}
+                                SelectedTopic={this.state.selectedTopic}/>
                 </div>
             </div>
         )

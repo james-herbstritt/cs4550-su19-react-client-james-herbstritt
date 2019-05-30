@@ -26,6 +26,4 @@ const CourseCard = ({course, deleteCard, selectCourse}) =>
         </div>
     </div>;
 
-
-
 export default CourseCard;

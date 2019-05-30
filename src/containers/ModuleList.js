@@ -9,7 +9,6 @@ const ModuleList = ({modules, selectModule, selectedModule}) =>
                                                          key={key}
                                                          selectModule={selectModule}
                                                          selectedModule={selectedModule}/>)}
-        }
     </ul>;
 
 export default ModuleList;
