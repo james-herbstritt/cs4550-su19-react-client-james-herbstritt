@@ -12,21 +12,15 @@ export default class CourseService {
 
     createCourse = course => this.courses.push(course);
 
-
     findAllCourses = () => this.courses;
 
-    findCourseById = id => {
-        for (var c in this.courses) {
-            if (this.courses[c].id === id) {
-                return this.courses[c];
-            }
-        }
-    };
+    findCourseById = id => 
+        this.courses.find(function (element) {
+            return element.id === id;
+        });
 
     deleteCourse = id => {
         this.courses = this.courses.filter(course => course.id !== id);
-        console.log("courses after", this.courses)
-
     };
 
     updateCourse(id, course) {

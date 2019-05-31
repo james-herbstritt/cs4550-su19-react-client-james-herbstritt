@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import CourseTable from "./CourseTable";
 import CourseGrid from "./CourseGrid";
 import CourseService from '../services/CourseService';
@@ -22,7 +22,6 @@ export default class WhiteBoard extends React.Component {
         this.setState({selectedCourse: courseService.findCourseById(id)});
     };
 
-
     deleteCourse = id => {
         let courseService = CourseService.getInstance();
         courseService.deleteCourse(id);
@@ -35,12 +34,17 @@ export default class WhiteBoard extends React.Component {
         if (courseName === "") {
             courseName = "New Course Title";
         }
-        var topics =  [{title: "Default Topic"}];
+        var topics =  [{
+            id: new Date().getTime(),
+            title: "Default Topic"
+        }];
         var lessons = [{
+            id: new Date().getTime(),
             title: "Default Lesson",
             topics: topics
         }];
         var modules = [{
+            id: new Date().getTime(),
             title: "Default Module",
             lessons: lessons
         }];
@@ -53,12 +57,24 @@ export default class WhiteBoard extends React.Component {
         this.setState({courses: courseService.findAllCourses()});
     };
 
+    deleteModule = id => {
+        let courseService = CourseService.getInstance();
+        let newCourse = {
+            id: this.state.selectedCourse.id,
+            title: this.state.selectedCourse.title,
+            modules: this.state.selectedCourse.modules.filter(module => module.id !== id)
+        };
+        courseService.updateCourse(this.state.selectedCourse.id, newCourse);
+        this.setState({courses: courseService.findAllCourses()});
+        this.selectCourse(this.state.selectedCourse.id);
+    };
+
     render() {
         return (
             <Router>
                 <Route path='/course/edit/:id'
                        render={() => <CourseEditor course={this.state.selectedCourse}
-                                                   deleteCourse={this.deleteCourse}/>}/>
+                                                   deleteModule={this.deleteModule}/>}/>
                     <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses}
                                                       deleteCourse={this.deleteCourse}

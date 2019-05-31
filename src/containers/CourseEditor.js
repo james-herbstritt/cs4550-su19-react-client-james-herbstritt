@@ -25,18 +25,18 @@ export default class CourseEditor extends React.Component {
     selectTopic = topic =>
         this.setState({selectedTopic: topic});
 
-
     render () {
         return (
             <div>
                 <CourseEditorNavbar course={this.props.course}/>
                 <div className="container-fluid">
                     <div className="row mt-3">
-                        <div className="col-2">
+                        <div className="col-3">
                             <ModuleList modules={this.props.course.modules}
                                         selectModule={this.selectModule}
-                                        selectedModule={this.state.selectedModule}/></div>
-                        <div className="col-10">
+                                        selectedModule={this.state.selectedModule}
+                                        deleteModule={this.props.deleteModule}/></div>
+                        <div className="col-9">
                             <LessonTabs lessons={this.state.selectedModule.lessons}
                                         selectLesson={this.selectLesson}
                                         selectedLesson={this.state.selectedLesson}/>
