@@ -69,12 +69,40 @@ export default class WhiteBoard extends React.Component {
         this.selectCourse(this.state.selectedCourse.id);
     };
 
+    addModule = moduleName => {
+        let courseService = CourseService.getInstance();
+        var topics =  [{
+            id: new Date().getTime(),
+            title: "Default Topic"
+        }];
+        var lessons = [{
+            id: new Date().getTime(),
+            title: "Default Lesson",
+            topics: topics
+        }];
+        let newModule = {
+            id: new Date().getTime(),
+            title: moduleName,
+            lessons: lessons
+        };
+        let newCourse = {
+            id: this.state.selectedCourse.id,
+            title: this.state.selectedCourse.title,
+            modules: [...this.state.selectedCourse.modules, newModule]
+        };
+
+        courseService.updateCourse(this.state.selectedCourse.id, newCourse);
+        this.setState({courses: courseService.findAllCourses()});
+        this.selectCourse(this.state.selectedCourse.id);
+    };
+
     render() {
         return (
             <Router>
                 <Route path='/course/edit/:id'
                        render={() => <CourseEditor course={this.state.selectedCourse}
-                                                   deleteModule={this.deleteModule}/>}/>
+                                                   deleteModule={this.deleteModule}
+                                                   addModule={this.addModule.bind(this)}/>}/>
                     <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses}
                                                       deleteCourse={this.deleteCourse}

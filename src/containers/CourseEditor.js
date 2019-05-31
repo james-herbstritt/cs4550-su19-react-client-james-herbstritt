@@ -25,6 +25,7 @@ export default class CourseEditor extends React.Component {
     selectTopic = topic =>
         this.setState({selectedTopic: topic});
 
+
     render () {
         return (
             <div>
@@ -35,7 +36,8 @@ export default class CourseEditor extends React.Component {
                             <ModuleList modules={this.props.course.modules}
                                         selectModule={this.selectModule}
                                         selectedModule={this.state.selectedModule}
-                                        deleteModule={this.props.deleteModule}/></div>
+                                        deleteModule={this.props.deleteModule}
+                                        createModule={this.props.addModule}/></div>
                         <div className="col-9">
                             <LessonTabs lessons={this.state.selectedModule.lessons}
                                         selectLesson={this.selectLesson}
