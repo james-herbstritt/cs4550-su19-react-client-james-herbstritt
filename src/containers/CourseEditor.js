@@ -56,6 +56,18 @@ export default class CourseEditor extends React.Component {
         courseService.updateCourse(this.props.course.id, newCourse);
     };
 
+    deleteTopic = id => {
+        let courseService = CourseService.getInstance();
+
+        this.state.selectedLesson.topics = this.state.selectedLesson.topics.filter(topic => topic.id !== id);
+
+        let newCourse = {
+            id: this.props.course.id,
+            title: this.props.course.title,
+            modules: this.props.course.modules
+        };
+        courseService.updateCourse(this.props.course.id, newCourse);
+    }
     render () {
         return (
             <div>
@@ -76,7 +88,8 @@ export default class CourseEditor extends React.Component {
                                         createLesson={this.createLesson}/>
                             <TopicPills topics={this.state.selectedLesson.topics}
                                         selectTopic={this.selectTopic}
-                                        selectedTopic={this.state.selectedTopic}/>
+                                        selectedTopic={this.state.selectedTopic}
+                                        deleteTopic={this.deleteTopic}/>
                         </div>
                     </div>
                 </div>

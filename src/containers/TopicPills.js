@@ -28,7 +28,8 @@ export default class TopicPills extends React.Component {
                                     <i className="fa fa-pencil"></i>
                                 </button>
                                 <button className="btn-sm bg-danger"
-                                        type="button">
+                                        type="button"
+                                        onClick={() => this.props.deleteTopic(topic.id)}>
                                     <i className="fa fa-times-circle"></i>
                                 </button>
                             </span>
