@@ -96,6 +96,8 @@ export default class WhiteBoard extends React.Component {
         this.selectCourse(this.state.selectedCourse.id);
     };
 
+
+
     render() {
         return (
             <Router>

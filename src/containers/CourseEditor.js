@@ -4,6 +4,7 @@ import ModuleList from './ModuleList';
 import LessonTabs from './LessonTabs';
 import TopicPills from './TopicPills';
 import CourseEditorNavbar from "./CourseEditorNabvbar";
+import CourseService from "../services/CourseService";
 
 export default class CourseEditor extends React.Component {
     constructor(props) {
@@ -26,6 +27,25 @@ export default class CourseEditor extends React.Component {
         this.setState({selectedTopic: topic});
 
 
+    createLesson = lessonName => {
+
+    }
+
+    deleteLesson = id => {
+        let courseService = CourseService.getInstance();
+
+        this.state.selectedModule.lessons = this.state.selectedModule.lessons.filter(lesson => lesson.id !== id);
+
+        let newCourse = {
+            id: this.props.course.id,
+            title: this.props.course.title,
+            modules: this.props.course.modules
+        };
+        courseService.updateCourse(this.props.course.id, newCourse);
+        this.setState({courses: courseService.findAllCourses()});
+        //this.selectModule(this.state.selectedModule);
+    };
+
     render () {
         return (
             <div>
@@ -41,7 +61,8 @@ export default class CourseEditor extends React.Component {
                         <div className="col-9">
                             <LessonTabs lessons={this.state.selectedModule.lessons}
                                         selectLesson={this.selectLesson}
-                                        selectedLesson={this.state.selectedLesson}/>
+                                        selectedLesson={this.state.selectedLesson}
+                                        deleteLesson={this.deleteLesson}/>
                             <TopicPills topics={this.state.selectedLesson.topics}
                                         selectTopic={this.selectTopic}
                                         selectedTopic={this.state.selectedTopic}/>

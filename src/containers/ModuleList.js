@@ -6,7 +6,6 @@ import ModuleListItem from './ModuleListItem'
 
 export default class ModuleList extends React.Component {
     constructor(props) {
-        console.log("These are the props", props);
         super(props);
         this.state = {
             moduleName: ""
@@ -18,10 +17,9 @@ export default class ModuleList extends React.Component {
     createModule = () => this.props.createModule(this.state.moduleName);
 
     render() {
-        console.log(this.props.modules);
         return (
             <div>
-                <input className="form-control mb-1"
+                <input className="form-control bg-light mb-1"
                        placeholder="title"
                        value ={this.state.moduleName}
                        onChange={this.moduleNameChange}/>

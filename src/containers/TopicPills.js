@@ -2,7 +2,7 @@ import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 const TopicPills = ({topics, selectTopic, selectedTopic}) =>
-    <ul className="nav nav-pills">
+    <ul className="nav nav-pills ">
         { topics.map((topic, key) =>
             <li className="nav-item"
                 key={key}

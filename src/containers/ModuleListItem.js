@@ -9,11 +9,11 @@ const ModuleListItem = ({module, selectModule, selectedModule, deleteModule}) =>
         onClick={() => selectModule(module)}>
         {module.title}
         <span className="float-right">
-            <button className="btn bg-success wbdv-edit mr-1"
+            <button className="btn bg-success mr-1"
                     type="button">
                 <i className="fa fa-pencil"></i>
             </button>
-            <button className="btn bg-danger wbdv-delete"
+            <button className="btn bg-danger"
                     type="button"
                     onClick={() => deleteModule(module.id)}>
                 <i className="fa fa-times-circle"></i>
