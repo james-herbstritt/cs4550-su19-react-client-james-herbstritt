@@ -3,10 +3,17 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default class LessonTabs extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            lessonName: ""
+        }
     }
+
+    lessonNameChange = event =>  this.setState({lessonName: event.target.value});
+
+    createLesson = () => this.props.createLesson(this.state.lessonName);
+
     render() {
         return (
             <ul className="nav nav-tabs">
@@ -33,10 +40,13 @@ export default class LessonTabs extends React.Component {
                     </li>)}
                 <li>
                     <input className="nav-item form-control bg-light"
-                           placeholder="lesson"/>
+                           placeholder="lesson"
+                           onChange={this.lessonNameChange}
+                           value={this.state.lessonName}/>
                 </li>
                 <li>
-                    <button className="btn btn-primary btn-block ml-1">
+                    <button className="btn btn-primary btn-block ml-1"
+                            onClick={this.createLesson}>
                         <i className="fa fa-plus-circle"></i>
                     </button>
                 </li>

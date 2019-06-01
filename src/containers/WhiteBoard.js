@@ -96,7 +96,10 @@ export default class WhiteBoard extends React.Component {
         this.selectCourse(this.state.selectedCourse.id);
     };
 
-
+    updateCourses = () => {
+        let courseService = CourseService.getInstance();
+        this.setState({courses: courseService.findAllCourses()});
+    }
 
     render() {
         return (
@@ -104,7 +107,8 @@ export default class WhiteBoard extends React.Component {
                 <Route path='/course/edit/:id'
                        render={() => <CourseEditor course={this.state.selectedCourse}
                                                    deleteModule={this.deleteModule}
-                                                   addModule={this.addModule.bind(this)}/>}/>
+                                                   addModule={this.addModule.bind(this)}
+                                                   updateCourses={this.updateCourses.bind(this)}/>}/>
                     <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses}
                                                       deleteCourse={this.deleteCourse}
