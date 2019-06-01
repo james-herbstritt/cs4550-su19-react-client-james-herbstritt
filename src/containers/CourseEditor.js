@@ -27,7 +27,6 @@ export default class CourseEditor extends React.Component {
         this.setState({selectedTopic: topic});
 
     createLesson = lessonName => {
-        console.log("lessonName is", lessonName);
         let courseService = CourseService.getInstance();
         var topics =  [{
             id: new Date().getTime(),
@@ -54,6 +53,19 @@ export default class CourseEditor extends React.Component {
             modules: this.props.course.modules
         };
         courseService.updateCourse(this.props.course.id, newCourse);
+    };
+
+    createTopic = topicName => {
+        console.log("creating topic", topicName);
+        let courseService = CourseService.getInstance();
+        var topic = {
+            id: new Date().getTime(),
+            title: topicName
+        };
+
+        this.state.selectedLesson.topics.push(topic);
+        courseService.updateCourse(this.props.course.id, this.props.course);
+        this.props.updateCourses();
     };
 
     deleteTopic = id => {
@@ -89,7 +101,8 @@ export default class CourseEditor extends React.Component {
                             <TopicPills topics={this.state.selectedLesson.topics}
                                         selectTopic={this.selectTopic}
                                         selectedTopic={this.state.selectedTopic}
-                                        deleteTopic={this.deleteTopic}/>
+                                        deleteTopic={this.deleteTopic}
+                                        createTopic={this.createTopic}/>
                         </div>
                     </div>
                 </div>

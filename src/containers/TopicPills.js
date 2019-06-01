@@ -10,6 +10,11 @@ export default class TopicPills extends React.Component {
             topicName: ""
         }
     }
+
+    topicNameChange = event => this.setState({topicName: event.target.value});
+
+    createTopic = () => this.props.createTopic(this.state.topicName);
+
     render() {
         return (
             <ul className="nav nav-pills mt-1">
@@ -38,10 +43,12 @@ export default class TopicPills extends React.Component {
                 <li>
                     <input className="nav-item form-control bg-light"
                            placeholder="topic"
+                           onChange={this.topicNameChange}
                            value={this.state.topicName}/>
                 </li>
                 <li>
-                    <button className="btn btn-primary btn-block ml-1">
+                    <button className="btn btn-primary btn-block ml-1"
+                            onClick={this.createTopic}>
                         <i className="fa fa-plus-circle"></i>
                     </button>
                 </li>
