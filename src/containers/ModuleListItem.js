@@ -2,7 +2,7 @@ import React from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
-const ModuleListItem = ({module, selectModule, selectedModule, deleteModule}) =>
+const ModuleListItem = ({module, selectModule, selectedModule, deleteModule, editModule}) =>
     <li className={module === selectedModule ?
         "list-group-item active text-center" :
         "list-group-item text-center"}
@@ -10,7 +10,8 @@ const ModuleListItem = ({module, selectModule, selectedModule, deleteModule}) =>
         {module.title}
         <span className="float-right">
             <button className="btn bg-success mr-1"
-                    type="button">
+                    type="button"
+                    onClick={editModule}>
                 <i className="fa fa-pencil"></i>
             </button>
             <button className="btn bg-danger"

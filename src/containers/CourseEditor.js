@@ -79,7 +79,24 @@ export default class CourseEditor extends React.Component {
             modules: this.props.course.modules
         };
         courseService.updateCourse(this.props.course.id, newCourse);
-    }
+    };
+
+    findCourseById = id =>
+        this.courses.find(function (element) {
+            return element.id === id;
+        });
+
+    editModule = (moduleName, moduleId) => {
+        let courseService = CourseService.getInstance();
+
+        this.props.course.modules.find(function (element){
+            return element.id === moduleId;
+        }).title = moduleName;
+
+        courseService.updateCourse(this.props.course.id, this.props.course);
+        this.props.updateCourses();
+    };
+
     render () {
         return (
             <div>
@@ -91,7 +108,8 @@ export default class CourseEditor extends React.Component {
                                         selectModule={this.selectModule}
                                         selectedModule={this.state.selectedModule}
                                         deleteModule={this.props.deleteModule}
-                                        createModule={this.props.addModule}/></div>
+                                        createModule={this.props.addModule}
+                                        editModule={this.editModule}/></div>
                         <div className="col-9">
                             <LessonTabs lessons={this.state.selectedModule.lessons}
                                         selectLesson={this.selectLesson}

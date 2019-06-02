@@ -96,10 +96,11 @@ export default class WhiteBoard extends React.Component {
         this.selectCourse(this.state.selectedCourse.id);
     };
 
+
     updateCourses = () => {
         let courseService = CourseService.getInstance();
         this.setState({courses: courseService.findAllCourses()});
-    }
+    };
 
     render() {
         return (
