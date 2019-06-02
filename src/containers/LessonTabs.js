@@ -28,7 +28,8 @@ export default class LessonTabs extends React.Component {
                             {lesson.title}
                             <span className="float-right mb-1">
             <button className="btn-sm bg-success ml-3 mr-1"
-                    type="button">
+                    type="button"
+                    onClick={() => this.props.editLesson(this.state.lessonName, lesson.id)}>
                 <i className="fa fa-pencil"></i>
             </button>
             <button className="btn-sm bg-danger"
