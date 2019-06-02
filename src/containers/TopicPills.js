@@ -29,7 +29,8 @@ export default class TopicPills extends React.Component {
                             {topic.title}
                             <span className="float-right mb-1">
                                 <button className="btn-sm bg-success ml-3 mr-1"
-                                        type="button">
+                                        type="button"
+                                        onClick={() => this.props.editTopic(this.state.topicName, topic.id)}>
                                     <i className="fa fa-pencil"></i>
                                 </button>
                                 <button className="btn-sm bg-danger"
