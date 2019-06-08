@@ -1,0 +1,7 @@
+.wbdv-hide-first > li:first-of-type button:first-of-type {
+    display: none;
+}
+
+.wbdv-hide-last > li:last-of-type button:nth-of-type(2) {
+    display: none;
+}
