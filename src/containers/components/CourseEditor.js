@@ -1,10 +1,10 @@
 import React from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import ModuleList from './ModuleList';
 import LessonTabs from './LessonTabs';
 import TopicPills from './TopicPills';
 import CourseEditorNavbar from "./CourseEditorNabvbar";
-import CourseService from "../services/CourseService";
+import CourseService from "../../services/CourseService";
 
 export default class CourseEditor extends React.Component {
     constructor(props) {

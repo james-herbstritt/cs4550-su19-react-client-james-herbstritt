@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../../node_modules/font-awesome/css/font-awesome.min.css';
-import CourseRow from '../containers/CourseRow';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../../../node_modules/font-awesome/css/font-awesome.min.css';
+import CourseRow from './CourseRow';
 import CourseTableHeader from "./CourseTableHeader";
 import CourseNavbar from "./CourseNavbar"
 

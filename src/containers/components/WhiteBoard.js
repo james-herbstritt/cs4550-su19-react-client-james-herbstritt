@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import CourseTable from "./CourseTable";
 import CourseGrid from "./CourseGrid";
-import CourseService from '../services/CourseService';
+import CourseService from '../../services/CourseService';
 import CourseEditor from "./CourseEditor";
 
 export default class WhiteBoard extends React.Component {

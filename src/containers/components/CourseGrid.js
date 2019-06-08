@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import CourseCard from './CourseCard';
 import CourseGridHeader from "./CourseGridHeader";
 import CourseNavbar from "./CourseNavbar";
