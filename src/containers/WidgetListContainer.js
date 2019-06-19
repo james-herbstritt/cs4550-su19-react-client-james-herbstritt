@@ -19,13 +19,11 @@ const stateToPropertyMapper = state => ({
 
 const propertyToDispatchMapper = dispatch => ({
     updateWidget: (widgetId, widget) => {
-
     },
 
-    createWidget: () => {
+    createWidget: position => {
         let widget = {
             widgetType: HEADING,
-            id: (new Date()).getTime(),
             headingText: "Default Heading",
             size: 1,
             listText: "Default List Item",
@@ -37,7 +35,7 @@ const propertyToDispatchMapper = dispatch => ({
             height: 0,
             cssClass: "",
             style: "",
-            value: ""};
+            position: position};
         console.log("creating widget ", widget);
         widgetService
             .createWidget(widget)
