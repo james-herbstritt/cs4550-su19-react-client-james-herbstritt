@@ -103,7 +103,12 @@ export default class WidgetListComponent  extends React.Component {
                 {
                     this.props.edit &&
                     <button className="btn btn-primary btn-block"
-                        onClick={this.props.createWidget}>
+                        onClick={() => {
+                            if(this.props.widgets.length !== 0)
+                                this.props.createWidget(this.props.widgets[this.props.widgets.length - 1].position + 1)
+                            else
+                                this.props.createWidget(0);
+                        }}>
                     <i className="fa fa-plus-circle"></i>
                 </button>
                 }
