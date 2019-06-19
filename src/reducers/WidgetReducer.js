@@ -43,7 +43,6 @@ const Widgets = (state = {widgets : [], edit: true}, action) => {
 
       case FIND_ALL_WIDGETS:
           console.log(action.widgets);
-          console.log("edit is", state.edit);
           return {
               widgets: action.widgets,
               edit: state.edit
@@ -60,6 +59,9 @@ const Widgets = (state = {widgets : [], edit: true}, action) => {
           nextStateUp = JSON.parse(nextStateUp);
           let findexUp = state.widgets.indexOf(action.widget);
           let tempUp = state.widgets[findexUp - 1];
+          let tempPosUp = tempUp.position;
+          tempUp.position = action.widget.position;
+          action.widget.position = tempPosUp;
           nextStateUp.widgets[findexUp] = tempUp;
           nextStateUp.widgets[findexUp - 1] = action.widget;
           return nextStateUp;
@@ -69,6 +71,9 @@ const Widgets = (state = {widgets : [], edit: true}, action) => {
           nextStateDown = JSON.parse(nextStateDown);
           let findexDown = state.widgets.indexOf(action.widget);
           let tempDown = state.widgets[findexDown + 1];
+          let tempPosDown = tempDown.position;
+          tempDown.position = action.widget.position;
+          action.widget.position = tempPosDown;
           nextStateDown.widgets[findexDown] = tempDown;
           nextStateDown.widgets[findexDown + 1] = action.widget;
           return nextStateDown;
