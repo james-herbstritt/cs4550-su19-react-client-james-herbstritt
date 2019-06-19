@@ -1,8 +1,7 @@
-import courses from '../db/courses.json'
 export default class CourseService {
     static myInstance = null;
-    courses = courses;
-
+    static localUrl = "http://localhost:8080/api/courses/";
+    static herokuUrl = "https://cs4550-su19-james-herbstritt.herokuapp.com/api/courses/";
     static getInstance() {
         if (CourseService.myInstance == null) {
             CourseService.myInstance = new CourseService();
@@ -10,25 +9,40 @@ export default class CourseService {
         return this.myInstance;
     }
 
-    createCourse = course => this.courses.push(course);
-
-    findAllCourses = () => this.courses;
-
-    findCourseById = id => 
-        this.courses.find(function (element) {
-            return element.id === id;
+    createCourse = course =>
+        fetch(CourseService.herokuUrl, {
+            method: "post",
+            body: JSON.stringify(course),
+            headers: {
+                "content-type": "application/json"
+            }
         });
 
-    deleteCourse = id => {
-        this.courses = this.courses.filter(course => course.id !== id);
+    findAllCourses = () => {
+        console.log("Finding courses");
+        return fetch(CourseService.herokuUrl)
+            .then(response => response.json());
     };
 
-    updateCourse(id, course) {
-        for (var c in this.courses) {
-            if (this.courses[c].id === id) {
-                this.courses[c] = course;
-                this.courses[c].id = id;
+    findCourseById = courseId =>
+        fetch(CourseService.herokuUrl + courseId)
+            .then(response => response.json());
+
+
+    deleteCourse = courseId =>
+        fetch(CourseService.herokuUrl + courseId, {
+            method: "delete",
+            headers: {
+                "content-type": "application/json"
             }
-        }
-    };
+        });
+
+    updateCourse = (courseId, newCourse) => {
+        return fetch(CourseService.herokuUrl + courseId, {
+            method: "put",
+            body: JSON.stringify(newCourse),
+            headers: {
+                "content-type": "application/json"
+            }
+        })};
 }
