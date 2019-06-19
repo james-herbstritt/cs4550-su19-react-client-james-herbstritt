@@ -4,16 +4,18 @@ import CourseTable from "./CourseTable";
 import CourseGrid from "./CourseGrid";
 import CourseService from '../services/CourseService';
 import CourseEditor from "./CourseEditor";
+import ModuleService from "../services/ModuleService";
+import LessonService from "../services/LessonService";
+import TopicService from "../services/TopicService";
 
 export default class WhiteBoard extends React.Component {
     constructor(props) {
         super(props);
         let courseService = CourseService.getInstance();
-        const courses = courseService.findAllCourses();
-        this.state = {
-            courses: courses,
-            selectedCourse: courses[0]
-        };
+        let courses = courseService.findAllCourses();
+         this.state = {courses: null};
+        courses.then(response => this.setState({courses: response, selectedCourse: response[0]}));
+        //console.log(this.state.courses);
     }
 
     selectCourse = id => {
@@ -59,67 +61,76 @@ export default class WhiteBoard extends React.Component {
 
     deleteModule = id => {
         let courseService = CourseService.getInstance();
-        let newCourse = {
-            id: this.state.selectedCourse.id,
-            title: this.state.selectedCourse.title,
-            modules: this.state.selectedCourse.modules.filter(module => module.id !== id)
-        };
-        courseService.updateCourse(this.state.selectedCourse.id, newCourse);
-        this.setState({courses: courseService.findAllCourses()});
-        this.selectCourse(this.state.selectedCourse.id);
+        let moduleService = ModuleService.getInstance();
+
+        return moduleService.deleteModule(id)
+            .then(true);
+
+        // return courseService.findAllCourses().then(response => this.setState({
+        //     courses: response,
+        //     selectedCourse: response[0]
+        // })).then(true);
     };
 
     addModule = moduleName => {
         let courseService = CourseService.getInstance();
-        var topics =  [{
-            id: new Date().getTime(),
+        let moduleService = ModuleService.getInstance();
+        let lessonService = LessonService.getInstance();
+        let topicService = TopicService.getInstance();
+
+        let topic =  {
             title: "Default Topic"
-        }];
-        var lessons = [{
-            id: new Date().getTime(),
-            title: "Default Lesson",
-            topics: topics
-        }];
-        let newModule = {
-            id: new Date().getTime(),
-            title: moduleName,
-            lessons: lessons
         };
-        let newCourse = {
-            id: this.state.selectedCourse.id,
-            title: this.state.selectedCourse.title,
-            modules: [...this.state.selectedCourse.modules, newModule]
+        let lesson = {
+            title: "Default Lesson"
+        };
+        if(moduleName === "") {
+            moduleName = "Default Module"
+        }
+        let newModule = {
+            title: moduleName
         };
 
-        courseService.updateCourse(this.state.selectedCourse.id, newCourse);
-        this.setState({courses: courseService.findAllCourses()});
-        this.selectCourse(this.state.selectedCourse.id);
+        return moduleService.createModuleForCourse(newModule, this.state.selectedCourse.id)
+            .then(response => response[response.length - 1])
+            .then(response => lessonService.createLessonForModule(lesson, response.id))
+            .then(response => response[response.length - 1])
+            .then(response => topicService.createTopicForLesson(topic, response.id))
+            .then(response=> {console.log("first response", response);
+                                        courseService.findAllCourses().then(response => {
+                                            console.log("second response", response);
+                                            this.setState({courses: response, selectedCourse: response[0]});
+                                        });}).then(true);
     };
 
 
     updateCourses = () => {
         let courseService = CourseService.getInstance();
-        this.setState({courses: courseService.findAllCourses()});
+        console.log("updating courses");
+        return courseService.findAllCourses().then(response => this.setState({
+            courses: response,
+            selectedCourse: response[0]
+        })).then(true);
     };
 
     render() {
         return (
             <Router>
-                <Route path='/course/edit/:id'
+                {this.state.courses && this.state.selectedCourse.modules && <Route path='/course/edit/:id'
                        render={() => <CourseEditor course={this.state.selectedCourse}
                                                    deleteModule={this.deleteModule}
                                                    addModule={this.addModule.bind(this)}
-                                                   updateCourses={this.updateCourses.bind(this)}/>}/>
-                    <Route path="/course/table"
+                                                   updateCourses={this.updateCourses.bind(this)}/>}/>}
+                {this.state.courses && <Route path="/course/table"
                            render={() => <CourseTable courses={this.state.courses}
                                                       deleteCourse={this.deleteCourse}
                                                       selectCourse={this.selectCourse}
-                                                      addCourse={this.addCourse.bind(this)}/>}/>
-                    <Route path="/course/grid"
+                                                      addCourse={this.addCourse.bind(this)}/>}/>}
+                {this.state.courses && <Route path="/course/grid"
                            render={() => <CourseGrid courses={this.state.courses}
                                                      deleteCourse={this.deleteCourse}
                                                      selectCourse={this.selectCourse}
-                                                     addCourse={this.addCourse.bind(this)}/>}/>
+                                                     addCourse={this.addCourse.bind(this)}/>}/>}
             </Router>
         )
     }
