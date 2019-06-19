@@ -1,5 +1,7 @@
 export default class WidgetService {
     static myInstance = null;
+    static localUrl = "http://localhost:8080/api/widgets/";
+    static herokuUrl = "https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets/";
     static getInstance() {
         if (WidgetService.myInstance == null) {
             WidgetService.myInstance =
@@ -8,9 +10,8 @@ export default class WidgetService {
         return this.myInstance;
     }
 
-
     createWidget = widget =>
-        fetch("https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets", {
+        fetch(WidgetService.herokuUrl, {
             method: "post",
             body: JSON.stringify(widget),
             headers: {
@@ -19,15 +20,15 @@ export default class WidgetService {
         });
 
     findAllWidgets = () =>
-        fetch("https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets")
+        fetch(WidgetService.herokuUrl)
             .then(response => response.json());
 
     findWidgetById = widgetId =>
-        fetch(`https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets/${widgetId}`)
+        fetch(WidgetService.herokuUrl + widgetId)
             .then(response => response.json());
 
     deleteWidget = widgetId =>
-        fetch(`https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets/${widgetId}`, {
+        fetch(WidgetService.herokuUrl + widgetId, {
             method: "delete",
             headers: {
                 "content-type": "application/json"
@@ -35,7 +36,7 @@ export default class WidgetService {
         });
 
     udpateWidget = (widgetId, newwidget) => {
-        return fetch(`https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets/${widgetId}`, {
+        return fetch(WidgetService.herokuUrl + widgetId, {
             method: "put",
             body: JSON.stringify(newwidget),
             headers: {
@@ -44,7 +45,7 @@ export default class WidgetService {
     })};
 
     saveWidgets = widgets => {
-        return fetch("https://cs4550-su19-james-herbstritt.herokuapp.com/api/widgets/", {
+        return fetch(WidgetService.herokuUrl, {
             method: "put",
             body: JSON.stringify(widgets),
             headers: {
